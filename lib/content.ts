@@ -264,7 +264,7 @@ export const projects: Project[] = [
     tech: ["Next.js", "FastAPI", "Python", "XGBoost", "ARIMA", "GeoPandas", "DuckDB", "PuLP"],
     figure: "Feeder stress map",
     demo: "https://zeus-grid.vercel.app", // TODO — live URL
-    repo: "https://github.com/NaveedAhmeds/zeus", // TODO — source URL
+    repo: "https://github.com/Apex-Ascension-Protocol/zeus", // TODO — source URL
   },
   {
     index: "02",
