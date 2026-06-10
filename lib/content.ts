@@ -365,7 +365,7 @@ export type Leadership = {
   type: string;
   tag?: string;
   title: string;
-  image? :string,
+  image: string;
   org: string;
   body: string;
   figure: string;
