@@ -30,38 +30,36 @@ export default function Research() {
         <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-xs uppercase tracking-label text-muted">Currently researching</p>
-            <h2 className="mt-2 text-xl font-semibold tracking-tight text-ink md:text-2xl">Selected notes & brief insights</h2>
+            <h2 className="mt-2 text-2xl font-bold tracking-tight text-ink md:text-3xl">Selected notes & brief insights</h2>
           </div>
           <div className="font-mono text-xs uppercase tracking-label text-muted">Updated September 2026</div>
         </div>
 
-        <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {researchNotes.map((note, i) => (
-            <Reveal as="article" key={note.title} delay={(i % 3) * 60} className="bg-background">
-              <div className="p-6">
-                <button
-                  type="button"
-                  onClick={() => setOpen(note)}
-                  className="group flex h-full w-full flex-col items-stretch rounded-md p-5 text-left transition-shadow duration-200 hover:shadow-lift"
-                >
-                  <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-label text-muted">
-                    <span className="text-ink/70">{note.category}</span>
-                    <span>{note.date}</span>
-                  </div>
-                  <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight text-ink">
-                    {note.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{note.insight}</p>
+            <Reveal as="article" key={note.title} delay={(i % 3) * 60} className="h-full">
+              <button
+                type="button"
+                onClick={() => setOpen(note)}
+                className="group h-full rounded-2xl border border-line bg-background/60 p-6 text-left transition-shadow duration-200 hover:shadow-lift"
+              >
+                <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-label text-muted">
+                  <span className="text-ink/70">{note.category}</span>
+                  <span>{note.date}</span>
+                </div>
+                <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight text-ink">
+                  {note.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{note.insight}</p>
 
-                  <div className="mt-5 flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-label text-muted transition-colors duration-200 group-hover:text-ink">
-                      Read note
-                      <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5">→</span>
-                    </span>
-                    <div className="rounded-md border border-line bg-surface/40 px-3 py-1 text-[12px] font-mono text-muted">My take</div>
-                  </div>
-                </button>
-              </div>
+                <div className="mt-5 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-label text-muted transition-colors duration-200 group-hover:text-ink">
+                    Read note
+                    <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5">→</span>
+                  </span>
+                  <div className="rounded-md border border-line bg-surface/40 px-3 py-1 text-[12px] font-mono text-muted">My take</div>
+                </div>
+              </button>
             </Reveal>
           ))}
         </div>

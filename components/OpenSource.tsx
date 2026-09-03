@@ -81,18 +81,24 @@ function Row({ c }: { c: Contribution }) {
         </div>
 
         {open && (
-          <div ref={panelRef} className="mt-4 rounded-lg border border-line bg-background p-4">
-            <p className="text-sm leading-relaxed text-ink/90">{c.summary}</p>
+          <div ref={panelRef} className="mt-4 grid gap-4">
+            <div className="rounded-lg border border-line bg-background p-4">
+              <p className="text-sm leading-relaxed text-ink/90">{c.summary}</p>
+            </div>
+
             {c.tech && (
-              <div className="mt-3 flex flex-wrap gap-2">
-                {c.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
-                  >
-                    {t}
-                  </span>
-                ))}
+              <div className="rounded-lg border border-line bg-background p-4">
+                <p className="font-mono text-[10px] uppercase tracking-label text-muted">Tech</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {c.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
           </div>

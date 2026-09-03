@@ -4,11 +4,11 @@ import { hero } from "@/lib/content";
 
 export default function Hero() {
   return (
-    <section className="relative mx-auto flex min-h-[78vh] w-full max-w-content items-center justify-center px-6 pt-28 pb-16 md:px-8 md:pt-36">
-      <div className="w-full max-w-5xl">
-        <div className="grid w-full items-center gap-10 md:grid-cols-[1.05fr_0.95fr] md:gap-16">
-        {/* Left — content */}
-        <div className="mx-auto w-full max-w-2xl text-center md:text-left">
+    <section className="relative mx-auto flex min-h-[72vh] w-full max-w-content items-center justify-center px-6 pt-28 pb-16 md:px-8 md:pt-36">
+      <div className="w-full max-w-4xl">
+        <div className="w-full">
+        {/* Centered content */}
+        <div className="mx-auto w-full max-w-2xl text-center">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-label text-muted">
               AI / ML · Security
@@ -35,7 +35,7 @@ export default function Hero() {
 
           {/* Lightweight CNN animation: SVG + CSS for fast rendering */}
           <Reveal delay={260}>
-            <div className="mt-6 max-w-md rounded-md border border-line bg-surface/40 px-4 py-3">
+            <div className="mt-6 mx-auto max-w-lg rounded-2xl border border-line bg-background/60 px-5 py-4 shadow-sm">
               <div className="mx-auto w-full">
                 <svg viewBox="0 0 200 80" className="w-full h-20" aria-hidden>
                   <defs>
@@ -103,7 +103,7 @@ export default function Hero() {
           </Reveal>
 
           <Reveal delay={300}>
-            <div className="mt-8 flex justify-center md:justify-start">
+            <div className="mt-8 flex justify-center">
               <a
                 href={hero.cta.href}
                 className="group inline-flex items-center gap-3 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 ease-out-expo hover:shadow-lift"
@@ -114,32 +114,7 @@ export default function Hero() {
             </div>
           </Reveal>
         </div>
-
-        {/* Right — AI artwork */}
-        <Reveal delay={200} blur>
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line md:aspect-[5/6] bg-gradient-to-tr from-indigo-700 via-sky-600 to-emerald-400">
-            {/* Decorative SVG instead of static image — minimal, fast to render */}
-            <svg viewBox="0 0 600 600" className="w-full h-full" preserveAspectRatio="xMidYMid slice" aria-hidden>
-              <defs>
-                <linearGradient id="g1" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#7c3aed" stopOpacity="0.85" />
-                  <stop offset="50%" stopColor="#06b6d4" stopOpacity="0.6" />
-                  <stop offset="100%" stopColor="#10b981" stopOpacity="0.6" />
-                </linearGradient>
-                <filter id="grain">
-                  <feTurbulence baseFrequency="0.8" numOctaves="1" stitchTiles="stitch" />
-                  <feColorMatrix type="saturate" values="0" />
-                  <feBlend mode="overlay" />
-                </filter>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#g1)" />
-              <g opacity="0.06" transform="translate(40,40)">
-                <path d="M0 200 C150 100 350 300 600 200" stroke="#fff" strokeWidth="2" fill="none" />
-                <path d="M0 300 C150 200 350 400 600 300" stroke="#fff" strokeWidth="1" fill="none" />
-              </g>
-            </svg>
-          </div>
-        </Reveal>
+        </div>
         </div>
       </div>
     </section>

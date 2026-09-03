@@ -9,7 +9,7 @@ import { projects, projectCategories, type Project } from "@/lib/content";
 
 function CaseBlock({ label, body }: { label: string; body: string }) {
   return (
-    <div className="rounded-lg border border-line bg-background p-4">
+    <div className="w-full rounded-lg border border-line bg-background p-4">
       <p className="font-mono text-[10px] uppercase tracking-label text-muted">{label}</p>
       <p className="mt-2 text-sm leading-relaxed text-ink/90">{body}</p>
     </div>
@@ -119,7 +119,7 @@ function ProjectRow({ project, imageFirst }: { project: Project; imageFirst: boo
               open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
             }`}
           >
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4">
               <CaseBlock label="Problem" body={project.problem} />
               <CaseBlock label="Approach" body={project.approach} />
               <CaseBlock label="Impact" body={project.impact} />
@@ -155,7 +155,7 @@ export default function Projects() {
               <div key={category}>
                 <Reveal>
                   <div className="mb-12 flex items-baseline gap-5">
-                    <h3 className="text-xl font-semibold tracking-tight md:text-2xl bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">
+                    <h3 className="text-xl font-semibold tracking-tight md:text-2xl bg-gradient-to-r from-blue-400 to-blue-700 bg-clip-text text-transparent">
                       {category}
                     </h3>
                     <span className="h-px flex-1 bg-line" />

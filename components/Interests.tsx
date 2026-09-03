@@ -14,7 +14,7 @@ export default function Interests() {
       <div className="grid gap-6 border-t border-line sm:grid-cols-2 sm:gap-x-8">
         {interests.map((item, i) => (
           <Reveal key={item.title} delay={(i % 2) * 60} className="h-full">
-            <div className="rounded-lg border border-line bg-background p-5">
+            <div className="rounded-lg border border-line bg-background p-6">
               <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                   <div className="rounded-md bg-surface px-3 py-2 font-mono text-sm text-muted">{item.index}</div>
