@@ -11,17 +11,19 @@ export default function Interests() {
         title="Where software engineering, intelligence, and security meet."
       />
 
-      <div className="grid border-t border-line sm:grid-cols-2 sm:gap-x-12">
+      <div className="grid gap-6 border-t border-line sm:grid-cols-2 sm:gap-x-8">
         {interests.map((item, i) => (
           <Reveal key={item.title} delay={(i % 2) * 60} className="h-full">
-            <div className="flex h-full gap-5 border-b border-line py-7">
-              <span className="pt-0.5 font-mono text-xs text-muted">{item.index}</span>
-              <div className="flex flex-col">
-                <h3 className="text-base font-medium tracking-tight text-ink">{item.title}</h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.blurb}</p>
-                <p className="mt-3 border-l border-line pl-3 text-[13px] italic leading-relaxed text-ink/55">
-                  {item.why}
-                </p>
+            <div className="rounded-lg border border-line bg-background p-5">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  <div className="rounded-md bg-surface px-3 py-2 font-mono text-sm text-muted">{item.index}</div>
+                </div>
+                <div>
+                  <h3 className="text-base font-semibold tracking-tight text-ink">{item.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-muted">{item.blurb}</p>
+                  <p className="mt-3 text-[13px] italic leading-relaxed text-ink/70">{item.why}</p>
+                </div>
               </div>
             </div>
           </Reveal>

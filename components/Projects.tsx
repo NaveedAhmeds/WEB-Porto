@@ -1,4 +1,7 @@
+"use client";
+
 import Reveal from "@/components/Reveal";
+import { useState, useRef, useEffect } from "react";
 import SectionHeader from "@/components/SectionHeader";
 import Image from "next/image";
 import Placeholder from "@/components/Placeholder";
@@ -6,8 +9,8 @@ import { projects, projectCategories, type Project } from "@/lib/content";
 
 function CaseBlock({ label, body }: { label: string; body: string }) {
   return (
-    <div>
-      <p className="font-mono text-[11px] uppercase tracking-label text-muted">{label}</p>
+    <div className="rounded-lg border border-line bg-background p-4">
+      <p className="font-mono text-[10px] uppercase tracking-label text-muted">{label}</p>
       <p className="mt-2 text-sm leading-relaxed text-ink/90">{body}</p>
     </div>
   );
@@ -15,15 +18,18 @@ function CaseBlock({ label, body }: { label: string; body: string }) {
 
 function TechRow({ tech }: { tech: string[] }) {
   return (
-    <div className="flex flex-wrap gap-2">
-      {tech.map((t) => (
-        <span
-          key={t}
-          className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
-        >
-          {t}
-        </span>
-      ))}
+    <div className="rounded-lg border border-line bg-background p-3">
+      <p className="font-mono text-[10px] uppercase tracking-label text-muted">Tech</p>
+      <div className="mt-2 flex flex-wrap gap-2">
+        {tech.map((t) => (
+          <span
+            key={t}
+            className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
@@ -58,6 +64,15 @@ function Links({ demo, repo }: { demo?: string; repo?: string }) {
 }
 
 function ProjectRow({ project, imageFirst }: { project: Project; imageFirst: boolean }) {
+  const [open, setOpen] = useState(false);
+  const detailsRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (open && detailsRef.current) {
+      detailsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [open]);
+
   return (
     <Reveal>
       <article className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
@@ -69,14 +84,14 @@ function ProjectRow({ project, imageFirst }: { project: Project; imageFirst: boo
                 alt={`${project.title} — ${project.figure}`}
                 fill
                 sizes="(min-width: 768px) 45vw, 100vw"
-                className="object-cover"
+                className="object-cover object-center"
               />
             </div>
           ) : (
             <Placeholder caption={`FIG.${project.index} — ${project.figure}`} className="aspect-[4/3]" />
           )}
         </div>
-        <div className={imageFirst ? "md:order-2" : "md:order-1"}>
+          <div className={imageFirst ? "md:order-2" : "md:order-1"}>
           <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-label text-muted">
             <span>{project.index}</span>
             <span className="h-px w-6 bg-line" />
@@ -87,14 +102,37 @@ function ProjectRow({ project, imageFirst }: { project: Project; imageFirst: boo
           </h3>
           <p className="mt-2 text-base text-muted">{project.tagline}</p>
 
-          <div className="mt-7 space-y-5">
-            <CaseBlock label="Problem" body={project.problem} />
-            <CaseBlock label="Approach" body={project.approach} />
-            <CaseBlock label="Impact" body={project.impact} />
+          {/* Toggle button — minimal and subtle */}
+          <div className="mt-4">
+            <button
+              onClick={() => setOpen((s) => !s)}
+              className="inline-flex items-center gap-2 rounded-full border border-line bg-transparent px-3 py-1.5 font-mono text-[11px] text-muted transition-colors duration-200 hover:bg-surface-hover"
+            >
+              {open ? "Hide details" : "Show details"}
+              <span className={`transition-transform ${open ? "rotate-180" : "rotate-0"}`}>▾</span>
+            </button>
           </div>
-          <div className="mt-7 space-y-5">
-            <TechRow tech={project.tech} />
-            <Links demo={project.demo} repo={project.repo} />
+
+          <div
+            ref={detailsRef}
+            className={`mt-7 grid gap-4 overflow-hidden transition-all duration-300 ${
+              open ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="grid gap-4 md:grid-cols-3">
+              <CaseBlock label="Problem" body={project.problem} />
+              <CaseBlock label="Approach" body={project.approach} />
+              <CaseBlock label="Impact" body={project.impact} />
+            </div>
+
+            <div className="md:flex md:items-start md:justify-between md:gap-6">
+              <div className="md:flex-1">
+                <TechRow tech={project.tech} />
+              </div>
+              <div className="mt-4 md:mt-0 md:w-48">
+                <Links demo={project.demo} repo={project.repo} />
+              </div>
+            </div>
           </div>
         </div>
       </article>
@@ -117,7 +155,7 @@ export default function Projects() {
               <div key={category}>
                 <Reveal>
                   <div className="mb-12 flex items-baseline gap-5">
-                    <h3 className="text-xl font-semibold tracking-tight text-ink md:text-2xl">
+                    <h3 className="text-xl font-semibold tracking-tight md:text-2xl bg-gradient-to-r from-sky-500 to-indigo-600 bg-clip-text text-transparent">
                       {category}
                     </h3>
                     <span className="h-px flex-1 bg-line" />

@@ -27,43 +27,41 @@ export default function Research() {
       className="border-y border-line bg-surface px-6 py-24 md:px-8 md:py-32"
     >
       <div className="mx-auto max-w-content">
-        <SectionHeader
-          number="02"
-          label="Research & Notes"
-          title="Working notes on the systems I'm building and breaking."
-          description="Not blog posts but rather running observations on AI, security, and how modern systems behave under pressure. Open one for my full take."
-        />
+        <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-label text-muted">Currently researching</p>
+            <h2 className="mt-2 text-xl font-semibold tracking-tight text-ink md:text-2xl">Selected notes & brief insights</h2>
+          </div>
+          <div className="font-mono text-xs uppercase tracking-label text-muted">Updated September 2026</div>
+        </div>
 
         <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2 lg:grid-cols-3">
           {researchNotes.map((note, i) => (
-            <Reveal
-              as="article"
-              key={note.title}
-              delay={(i % 3) * 60}
-              className="bg-background"
-            >
-              <button
-                type="button"
-                onClick={() => setOpen(note)}
-                className="group flex h-full w-full flex-col p-7 text-left transition-colors duration-300 hover:bg-surface-hover"
-              >
-                <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-label text-muted">
-                  <span className="text-ink/70">{note.category}</span>
-                  <span>{note.date}</span>
-                </div>
-                <h3 className="mt-5 text-lg font-medium leading-snug tracking-tight text-ink">
-                  {note.title}
-                </h3>
-                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted">
-                  {note.insight}
-                </p>
-                <span className="mt-6 inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-label text-muted transition-colors duration-200 group-hover:text-ink">
-                  Read note
-                  <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5">
-                    →
-                  </span>
-                </span>
-              </button>
+            <Reveal as="article" key={note.title} delay={(i % 3) * 60} className="bg-background">
+              <div className="p-6">
+                <button
+                  type="button"
+                  onClick={() => setOpen(note)}
+                  className="group flex h-full w-full flex-col items-stretch rounded-md p-5 text-left transition-shadow duration-200 hover:shadow-lift"
+                >
+                  <div className="flex items-center justify-between font-mono text-[11px] uppercase tracking-label text-muted">
+                    <span className="text-ink/70">{note.category}</span>
+                    <span>{note.date}</span>
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold leading-snug tracking-tight text-ink">
+                    {note.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{note.insight}</p>
+
+                  <div className="mt-5 flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-label text-muted transition-colors duration-200 group-hover:text-ink">
+                      Read note
+                      <span className="transition-transform duration-300 ease-out-expo group-hover:translate-x-0.5">→</span>
+                    </span>
+                    <div className="rounded-md border border-line bg-surface/40 px-3 py-1 text-[12px] font-mono text-muted">My take</div>
+                  </div>
+                </button>
+              </div>
             </Reveal>
           ))}
         </div>

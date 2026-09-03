@@ -1,3 +1,6 @@
+"use client";
+
+import { useState, useRef, useEffect } from "react";
 import Reveal from "@/components/Reveal";
 import SectionHeader from "@/components/SectionHeader";
 import { contributions, type Contribution } from "@/lib/content";
@@ -32,6 +35,13 @@ function Links({ demo, repo }: { demo?: string; repo?: string }) {
 }
 
 function Row({ c }: { c: Contribution }) {
+  const [open, setOpen] = useState(false);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (open && panelRef.current) panelRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [open]);
+
   return (
     <div className="grid gap-x-10 gap-y-5 border-b border-line py-8 md:grid-cols-[1fr_auto]">
       <div className="max-w-2xl">
@@ -44,17 +54,47 @@ function Row({ c }: { c: Contribution }) {
           )}
           <span className="font-mono text-[11px] uppercase tracking-label text-muted">{c.role}</span>
         </div>
+
         <p className="mt-3 text-sm leading-relaxed text-muted">{c.summary}</p>
-        {c.tech && c.tech.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {c.tech.map((t) => (
-              <span
-                key={t}
-                className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
-              >
-                {t}
-              </span>
-            ))}
+
+        <div className="mt-4 flex items-center gap-3">
+          <button
+            onClick={() => setOpen((s) => !s)}
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-transparent px-3 py-1.5 font-mono text-[11px] text-muted transition-colors duration-200 hover:bg-surface-hover"
+          >
+            {open ? "Hide" : "Details"}
+            <span className={`transition-transform ${open ? "rotate-180" : "rotate-0"}`}>▾</span>
+          </button>
+
+          {c.tech && c.tech.length > 0 && (
+            <div className="ml-2 hidden items-center gap-2 md:flex">
+              {c.tech.map((t) => (
+                <span
+                  key={t}
+                  className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {open && (
+          <div ref={panelRef} className="mt-4 rounded-lg border border-line bg-background p-4">
+            <p className="text-sm leading-relaxed text-ink/90">{c.summary}</p>
+            {c.tech && (
+              <div className="mt-3 flex flex-wrap gap-2">
+                {c.tech.map((t) => (
+                  <span
+                    key={t}
+                    className="rounded-full border border-line bg-surface px-3 py-1 font-mono text-[11px] text-muted"
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
