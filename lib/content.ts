@@ -27,12 +27,12 @@ export const hero = {
     "Building intelligent systems through software engineering, artificial intelligence, machine learning, computer vision, and secured backend infrastructure.",
   subStatement:
     "Exploring how modern systems learn, reason, scale, and stay secure as AI becomes core infrastructure.",
-  cta: { label: "View Research", href: "#research" },
+  cta: { label: "View my research", href: "#research" },
 };
 
 // ---- Now (Current Focus + Recently Exploring) — update every few months ----
 export const now = {
-  updated: "June 2026",
+  updated: "September 2026",
   focus: [
     "The future of secure financial systems",
     "Reliability and recovery in agentic AI",
